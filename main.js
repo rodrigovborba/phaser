@@ -1,9 +1,8 @@
 let $modal = document.getElementById("myModal");
-
+let $phaserInside = document.getElementById("phaserInside");
 var $span = document.getElementsByClassName("close")[0];
 let $penaltiButton = document.getElementById('penalti-btn');
 $penaltiButton.onclick = function(){
-    console.dir($penaltiButton)
 
 var myCustomCanvas = document.createElement('canvas');
 
@@ -11,6 +10,7 @@ var myCustomCanvas = document.createElement('canvas');
 let config = {
     width: 300,
     height: 300,
+    parent: $phaserInside,
     canvas: myCustomCanvas,
     type: Phaser.WEBGL,
     scene: {
@@ -19,12 +19,13 @@ let config = {
     }
 };
 
-$modal.style.display = "block"
+
+$modal.style.display = "block";
 
 // Animação Penalti
 
 let game = new Phaser.Game(config);
-console.dir(game)
+console.log(game)
 
 function preload ()
 {
@@ -110,7 +111,10 @@ function create ()
                 delay: 1000
             })
         }
-        setInterval(function(){ game.canvas.remove(); }, 5000);
+        setTimeout(function(){ 
+            game.canvas.remove();
+            $modal.style.display = "none";
+        }, 5000);
     });
 
     botaoMeio.on('pointerover', function (event) {
@@ -175,7 +179,10 @@ function create ()
                 delay: 1000
             })
         }
-        setInterval(function(){ game.canvas.remove(); }, 5000);
+        setTimeout(function(){ 
+            game.canvas.remove(); 
+            $modal.style.display = "none";
+        }, 5000);
     });
 
     botaoDireita.on('pointerover', function (event) {
@@ -240,14 +247,12 @@ function create ()
                 delay: 1000
             })
         }
-        setInterval(function(){ game.canvas.remove(); }, 5000);
+        setTimeout(function(){ 
+            game.canvas.remove(); 
+            $modal.style.display = "none";
+        }, 5000);
     });   
   }
-}
-
-// When the user clicks on <span> (x), close the modal
-$span.onclick = function() {
-  $modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
